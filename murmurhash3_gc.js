@@ -35,12 +35,12 @@ function murmurhash3_32_gc(key, seed) {
 		h1 ^= k1;
 		
 		h1b = (((h1 & 0xffff) * 3) + ((((h1 >>> 16) * 3) & 0xffff) << 16));
-		h1 = (((h1b & 0xffff) + 0x52dce729) + ((((h1b >>> 16) + 0x52dce729) & 0xffff) << 16));
+		h1 = (((h1b & 0xffff) + 0xe729) + ((((h1b >>> 16) + 0x52dc) & 0xffff) << 16));
 	
 		c1b = (((c1 & 0xffff) * 5) + ((((c1 >>> 16) * 5) & 0xffff) << 16)); 
-		c1 = (((c1b & 0xffff) + 0x7b7d159c) + ((((c1b >>> 16) + 0x7b7d159c) & 0xffff) << 16));
+		c1 = (((c1b & 0xffff) + 0x159c) + ((((c1b >>> 16) + 0x7b7d) & 0xffff) << 16));
 		c2b = (((c2 & 0xffff) * 5) + ((((c2 >>> 16) * 5) & 0xffff) << 16)); 
-		c2 = (((c2b & 0xffff) + 0x6bce6396) + ((((c2b >>> 16) + 0x6bce6396) & 0xffff) << 16));
+		c2 = (((c2b & 0xffff) + 0x6396) + ((((c2b >>> 16) + 0x6bce) & 0xffff) << 16));
 	}
 	
 	k1 = 0;
@@ -56,15 +56,15 @@ function murmurhash3_32_gc(key, seed) {
 		h1 ^= k1;
 		
 		h1b = (((h1 & 0xffff) * 3) + ((((h1 >>> 16) * 3) & 0xffff) << 16));
-		h1 = (((h1b & 0xffff) + 0x52dce729) + ((((h1b >>> 16) + 0x52dce729) & 0xffff) << 16));
+		h1 = (((h1b & 0xffff) + 0xe729) + ((((h1b >>> 16) + 0x52dc) & 0xffff) << 16));
 	}
 	
 	h1 ^= key.length;
 
 	h1 ^= h1 >>> 16;
-	h1 = (((h1 & 0xffff) * 0x85ebca6b) + ((((h1 >>> 16) * 0x85ebca6b) & 0xffff) << 16));
+	h1 = (((h1 & 0xffff) * 0xca6b) + ((((h1 >>> 16) * 0x85eb) & 0xffff) << 16));
 	h1 ^= h1 >>> 13;
-	h1 = (((h1 & 0xffff) * 0xc2b2ae35) + ((((h1 >>> 16) * 0xc2b2ae35) & 0xffff) << 16));
+	h1 = (((h1 & 0xffff) * 0xae35) + ((((h1 >>> 16) * 0xc2b2) & 0xffff) << 16));
 	h1 ^= h1 >>> 16;
 
 	return h1 >>> 0;
