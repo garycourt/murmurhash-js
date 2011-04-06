@@ -1,5 +1,5 @@
 /**
- * JS Implementation of MurmurHash3 Beta (as of January 28, 2011)
+ * JS Implementation of MurmurHash3 (as of April 6, 2011)
  * 
  * @author <a href="mailto:gary.court@gmail.com">Gary Court</a>
  * @see http://github.com/garycourt/murmurhash-js
