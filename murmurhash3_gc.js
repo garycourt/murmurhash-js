@@ -14,11 +14,11 @@
 function murmurhash3_32_gc(key, seed) {
 	var remainder, bytes, h1, h1b, c1, c1b, c2, c2b, k1, i;
 	
-	remainder = key.length % 4;
+	remainder = key.length & 3; // key.length % 4
 	bytes = key.length - remainder;
-	h1 = 0x971e137b ^ seed;
-	c1 = 0x95543787;
-	c2 = 0x2ad7eb25;
+	h1 = seed;
+	c1 = 0xcc9e2d51;
+	c2 = 0x1b873593;
 	i = 0;
 	
 	while (i < bytes) {
@@ -30,17 +30,13 @@ function murmurhash3_32_gc(key, seed) {
 		++i;
 		
 		k1 = (((k1 & 0xffff) * c1) + ((((k1 >>> 16) * c1) & 0xffff) << 16));
-		k1 = (k1 << 11) | (k1 >>> 21);
+		k1 = (k1 << 15) | (k1 >>> 17);
 		k1 = (((k1 & 0xffff) * c2) + ((((k1 >>> 16) * c2) & 0xffff) << 16));
+
 		h1 ^= k1;
-		
-		h1b = (((h1 & 0xffff) * 3) + ((((h1 >>> 16) * 3) & 0xffff) << 16));
-		h1 = (((h1b & 0xffff) + 0xe729) + ((((h1b >>> 16) + 0x52dc) & 0xffff) << 16));
-	
-		c1b = (((c1 & 0xffff) * 5) + ((((c1 >>> 16) * 5) & 0xffff) << 16)); 
-		c1 = (((c1b & 0xffff) + 0x159c) + ((((c1b >>> 16) + 0x7b7d) & 0xffff) << 16));
-		c2b = (((c2 & 0xffff) * 5) + ((((c2 >>> 16) * 5) & 0xffff) << 16)); 
-		c2 = (((c2b & 0xffff) + 0x6396) + ((((c2b >>> 16) + 0x6bce) & 0xffff) << 16));
+        h1 = (h1 << 13) | (h1 >>> 19);
+		h1b = (((h1 & 0xffff) * 5) + ((((h1 >>> 16) * 5) & 0xffff) << 16));
+		h1 = (((h1b & 0xffff) + 0x6b64) + ((((h1b >>> 16) + 0xe654) & 0xffff) << 16));
 	}
 	
 	k1 = 0;
@@ -51,12 +47,9 @@ function murmurhash3_32_gc(key, seed) {
 		case 1: k1 ^= (key.charCodeAt(i) & 0xff);
 		
 		k1 = (((k1 & 0xffff) * c1) + ((((k1 >>> 16) * c1) & 0xffff) << 16));
-		k1 = (k1 << 11) | (k1 >>> 21);
+		k1 = (k1 << 16) | (k1 >>> 26);
 		k1 = (((k1 & 0xffff) * c2) + ((((k1 >>> 16) * c2) & 0xffff) << 16));
 		h1 ^= k1;
-		
-		h1b = (((h1 & 0xffff) * 3) + ((((h1 >>> 16) * 3) & 0xffff) << 16));
-		h1 = (((h1b & 0xffff) + 0xe729) + ((((h1b >>> 16) + 0x52dc) & 0xffff) << 16));
 	}
 	
 	h1 ^= key.length;
