@@ -47,7 +47,7 @@ function murmurhash3_32_gc(key, seed) {
 		case 1: k1 ^= (key.charCodeAt(i) & 0xff);
 		
 		k1 = (((k1 & 0xffff) * c1) + ((((k1 >>> 16) * c1) & 0xffff) << 16));
-		k1 = (k1 << 16) | (k1 >>> 26);
+		k1 = (k1 << 16) | (k1 >>> 16);
 		k1 = (((k1 & 0xffff) * c2) + ((((k1 >>> 16) * c2) & 0xffff) << 16));
 		h1 ^= k1;
 	}
