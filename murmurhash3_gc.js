@@ -25,11 +25,10 @@ function murmurhash3_32_gc(key, seed){
   var c2_h  = c2 & 0xffff0000;
 
   while (i < bytes) {
-    k1 = ((key.charCodeAt(  i) & 0xff)      ) |
-         ((key.charCodeAt(++i) & 0xff) << 8 ) |
-         ((key.charCodeAt(++i) & 0xff) << 16) |
-         ((key.charCodeAt(++i) & 0xff) << 24);
-    ++i;
+    k1 = ((key.charCodeAt(i++) & 0xff)      ) |
+         ((key.charCodeAt(i++) & 0xff) << 8 ) |
+         ((key.charCodeAt(i++) & 0xff) << 16) |
+         ((key.charCodeAt(i++) & 0xff) << 24);
 
     k1 = (k1 * c1_l + (k1 & 0xffff) * c1_h) & 0xffffffff; // note that javascript precision is 2^53
     k1 = (k1 << 15) | (k1 >>> 17);
