@@ -7,7 +7,7 @@
     "url": "git://github.com/kazuyukitanimura/murmurhash-js.git"
   },
   "engines": {
-    "node": "~0.4.7"
+    "node": "~0.6.2"
   },
   "dependencies": {
     "vows":">=0.6.0"
