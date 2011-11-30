@@ -21,8 +21,7 @@ for(var i=nTests; i--;){
 /**
  * Getting the hashvalues for the old hash function
  */
-var content;
-content = require('fs').readFileSync(__dirname + '/../old/murmurhash3_gc.js');
+var content = require('fs').readFileSync(__dirname + '/../old/murmurhash3_gc.js');
 eval(content.toString());
 for(var i=nTests; i--;){
   hashValues1.unshift(murmurhash3_32_gc(keys[i], seed));
@@ -31,10 +30,9 @@ for(var i=nTests; i--;){
 /**
  * Getting the hashvalues for the new hash function
  */
-content = require('fs').readFileSync(__dirname + '/../murmurhash3_gc.js');
-eval(content.toString());
+var murmurhash3 = require(__dirname + '/../murmurhash3_gc.js');
 for(var i=nTests; i--;){
-  hashValues2.unshift(murmurhash3_32_gc(keys[i], seed));
+  hashValues2.unshift(murmurhash3(keys[i], seed));
 }
 
 /**

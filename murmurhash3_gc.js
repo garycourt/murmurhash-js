@@ -11,7 +11,7 @@
  * @return {number} 32-bit positive integer hash 
  */
 
-function murmurhash3_32_gc(key, seed) {
+function murmurhash3_32_gc(key, seed){
   var remainder = key.length & 3; // key.length % 4
   var bytes = key.length - remainder;
   var h1    = seed;
@@ -20,9 +20,9 @@ function murmurhash3_32_gc(key, seed) {
   var i     = 0;
 
   var c1_l  = c1 & 0xffff;
-  var c1_h  = c1 >>> 16;
+  var c1_h  = c1 & 0xffff0000;
   var c2_l  = c2 & 0xffff;
-  var c2_h  = c2 >>> 16;
+  var c2_h  = c2 & 0xffff0000;
 
   while (i < bytes) {
     k1 = ((key.charCodeAt(  i) & 0xff)      ) |
@@ -31,9 +31,9 @@ function murmurhash3_32_gc(key, seed) {
          ((key.charCodeAt(++i) & 0xff) << 24);
     ++i;
 
-    k1 = (k1 * c1_l + (((k1 * c1_h) & 0xffff) << 16)) & 0xffffffff; // note that javascript precision is 2^53
+    k1 = (k1 * c1_l + (k1 & 0xffff) * c1_h) & 0xffffffff; // note that javascript precision is 2^53
     k1 = (k1 << 15) | (k1 >>> 17);
-    k1 = (k1 * c2_l + (((k1 * c2_h) & 0xffff) << 16)) & 0xffffffff;
+    k1 = (k1 * c2_l + (k1 & 0xffff) * c2_h) & 0xffffffff;
 
     h1 ^= k1;
     h1  = (h1 << 13) | (h1 >>> 19);
@@ -47,19 +47,25 @@ function murmurhash3_32_gc(key, seed) {
     case 2: k1 ^= (key.charCodeAt(i + 1) & 0xff) << 8;
     case 1: k1 ^= (key.charCodeAt(i    ) & 0xff);
 
-    k1 = (k1 * c1_l + (((k1 * c1_h) & 0xffff) << 16)) & 0xffffffff;
+    k1  = (k1 * c1_l + (k1 & 0xffff) * c1_h) & 0xffffffff;
     k1  = (k1 << 16) | (k1 >>> 16);
-    k1 = (k1 * c2_l + (((k1 * c2_h) & 0xffff) << 16)) & 0xffffffff;
+    k1  = (k1 * c2_l + (k1 & 0xffff) * c2_h) & 0xffffffff;
     h1 ^= k1;
   }
 
   h1 ^= key.length;
 
   h1 ^= h1 >>> 16;
-  h1  = (h1 * 0xca6b + (((h1 * 0x85eb) & 0xffff) << 16)) & 0xffffffff;
+  h1  = (h1 * 0xca6b + (h1 & 0xffff) * 0x85eb0000) & 0xffffffff;
   h1 ^= h1 >>> 13;
-  h1  = (h1 * 0xae35 + (((h1 * 0xc2b2) & 0xffff) << 16)) & 0xffffffff;
+  h1  = (h1 * 0xae35 + (h1 & 0xffff) * 0xc2b20000) & 0xffffffff;
   h1 ^= h1 >>> 16;
 
   return h1 >>> 0;
 }
+
+(function(){
+  if(typeof module !== 'undefined'){
+    module.exports = murmurhash3_32_gc;
+  }
+})();
