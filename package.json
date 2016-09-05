@@ -1,0 +1,22 @@
+{
+    "name": "es6-murmurhash",
+    "version": "0.0.1",
+    "description": "A ECMAScript 6 module for the optimised JavaScript implementation of the MurmurHash algorithms.",
+    "author": {
+        "name": "Gary Court",
+        "email": "gary.court@gmail.com"
+    },
+    "contributors": [{
+        "name": "Martin Krause",
+        "email": "public@mkrause.info",
+        "url": "http://mkrause.info"
+    }],
+    "main": "murmurhash3_gc",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/martinkr/murmurhash-js"
+    },
+    "license": "MIT",
+    "keywords": ["ECMAscript 6", "hash", "murmurhash"],
+    "bugs": "https://github.com/martinkr/murmurhash-js"
+}
