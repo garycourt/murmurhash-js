@@ -1,0 +1,19 @@
+{
+  "name": "murmurhash-js",
+  "version": "1.0.0",
+  "description": "An optimized JavaScript implementation of the MurmurHash algorithms.",
+  "main": "murmurhash3_gc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mappy/murmurhash-js.git"
+  },
+  "author": "Gary Court <gary.court@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mappy/murmurhash-js/issues"
+  },
+  "homepage": "https://github.com/Mappy/murmurhash-js#readme"
+}

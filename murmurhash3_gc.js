@@ -62,3 +62,8 @@ function murmurhash3_32_gc(key, seed) {
 
 	return h1 >>> 0;
 }
+
+if (typeof module === 'object' && module.exports) {
+	module.exports = murmurhash3_32_gc;
+}
+
