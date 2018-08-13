@@ -1,5 +1,9 @@
 # MurmurHash.js
 
+All credit for implementation the hashing function goes to  Gary Court's. I just added an export statement for ECMAScript 6 compatibility.
+
+---
+
 An optimized JavaScript implementation of the MurmurHash algorithms.
 
 These algorithms take a JavaScript string (and a seed), and quickly create a non-cryptographic 32-bit hash from it. And by quick I mean sub-millisecond performance.
